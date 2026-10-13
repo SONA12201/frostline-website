@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FrostLine Cold Chain Logistics</title>
+<link rel="icon" href="images/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#home"><img src="images/logo.svg" alt="FrostLine logo" width="36" height="36"> FrostLine</a>
+  <nav>
+    <a href="#about">About</a><a href="#services">Services</a><a href="#dashboard">Dashboard</a><a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <img src="images/logo.svg" alt="" class="hero-logo" width="72" height="72">
+  <h1>Temperature-controlled freight that stays in range, door to door.</h1>
+  <p>FrostLine moves vaccines, dairy and frozen food across Gujarat in monitored reefer trucks, so customers never lose stock to a warm truck.</p>
+  <a class="btn" href="#track">Get Started: track a shipment</a>
+  <a class="btn ghost" href="#services">See services and prices</a>
+</section>
+
+<section id="about">
+  <h2>About FrostLine</h2>
+  <div class="grid2">
+    <div><h3>What we do</h3><p>We run reefer trucks and cold storage hubs with live temperature logging on every load.</p>
+    <h3>Service area</h3><p>Vadodara, Ahmedabad, Surat, Rajkot and the highway corridors between them.</p></div>
+    <div><h3>Target customers</h3><p>Pharma distributors, dairies, ice cream makers, seafood exporters and fresh-produce wholesalers.</p>
+    <h3>Value proposition</h3><p>If the temperature leaves the agreed range, you get an alert in minutes and a full log for audits.</p></div>
+  </div>
+</section>
+
+<section id="services">
+  <h2>Services</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Service</th><th>Description</th><th>Temperature</th><th>Price</th></tr></thead>
+    <tbody>
+      <tr><td>Chilled Delivery</td><td>Same-city dairy and produce</td><td>2 to 8 °C</td><td>₹400 per trip</td></tr>
+      <tr><td>Frozen Delivery</td><td>Ice cream, meat, seafood</td><td>-18 °C or lower</td><td>₹650 per trip</td></tr>
+      <tr><td>Pharma Express</td><td>Vaccines and medicines, priority</td><td>2 to 8 °C, logged</td><td>₹900 per trip</td></tr>
+      <tr><td>Cold Storage</td><td>Pallet storage at our Vadodara hub</td><td>Set per pallet</td><td>₹120 per pallet/day</td></tr>
+    </tbody></table></div>
+  <p><a href="#contact">Need a quote? Send an enquiry.</a></p>
+</section>
+
+<section id="track">
+  <h2>Track a shipment</h2>
+  <p>Enter an order ID to see status, location and temperature. Try <b>FL1025</b>, <b>FL1026</b>, <b>FL1027</b>.</p>
+  <form id="trackForm" class="row">
+    <label for="orderId" class="sr">Order ID</label>
+    <input id="orderId" placeholder="e.g. FL1025" autocomplete="off">
+    <button class="btn" type="submit">Track order</button>
+  </form>
+  <div id="trackResult" class="result" aria-live="polite"></div>
+</section>
+
+<section id="dashboard">
+  <h2>Operations dashboard</h2>
+  <p class="sub">What the manager needs to know right now.</p>
+  <div class="kpis" id="kpis"></div>
+  <h3>Shipments this week by cargo type</h3>
+  <div id="chart" class="chart"></div>
+  <p><a href="#track">Look up a delayed order in Track a shipment</a></p>
+</section>
+
+<section id="contact">
+  <h2>Contact and enquiry</h2>
+  <div class="grid2">
+    <div>
+      <p><b>Email:</b> <a href="mailto:hello@frostline.example">hello@frostline.example</a></p>
+      <p><b>Phone:</b> <a href="tel:+910000000000">+91 00000 00000</a></p>
+      <p><b>Location:</b> Cold Hub, Makarpura GIDC, Vadodara, Gujarat</p>
+      <p><a href="https://www.google.com/maps/search/?api=1&query=Makarpura+GIDC+Vadodara" target="_blank" rel="noopener">Find our hub on Google Maps</a></p>
+      <p><a href="https://www.linkedin.com/" target="_blank" rel="noopener">Follow FrostLine on LinkedIn</a></p>
+      <p><a href="https://www.fssai.gov.in/" target="_blank" rel="noopener">Food safety rules we follow (FSSAI)</a></p>
+    </div>
+    <form id="enquiryForm">
+      <label>Name <input name="name" required></label>
+      <label>Cargo type
+        <select name="cargo"><option>Dairy</option><option>Frozen food</option><option>Pharma</option><option>Produce</option></select></label>
+      <label>Message <textarea name="msg" rows="3" required></textarea></label>
+      <button class="btn" type="submit">Send enquiry</button>
+      <p id="enqMsg" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer>© 2026 FrostLine Cold Chain Logistics. Class project.</footer>
+<script src="script.js"></script>
+</body>
+</html>

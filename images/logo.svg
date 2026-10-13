@@ -1,0 +1,49 @@
+// ----- Sample data (replace with real data later) -----
+const orders = {
+  FL1025: {customer:"Amul Dairy Depot", cargo:"Milk, 2 to 8 °C", status:"In Transit", location:"NH48 near Bharuch", eta:"Today 4:30 PM", temp:"4.2 °C", ok:true, driver:"Ramesh P."},
+  FL1026: {customer:"CityCare Pharma", cargo:"Vaccines, 2 to 8 °C", status:"Delayed", location:"Surat bypass, traffic", eta:"Today 6:45 PM", temp:"7.8 °C (near limit)", ok:false, driver:"Imran S."},
+  FL1027: {customer:"Arctic Ice Creams", cargo:"Ice cream, -18 °C", status:"Delivered", location:"Ahmedabad store", eta:"Delivered 11:10 AM", temp:"-19.5 °C", ok:true, driver:"Kiran D."}
+};
+const kpis = [
+  ["Total shipments",1250],["Delivered",1080],["In transit",120],["Delayed",50],
+  ["On-time delivery","86.4%"],["Temperature excursions",14,true],
+  ["Reefer fleet in use","82%"],["Customer rating","4.3/5"]
+];
+const weekly = [["Pharma",210],["Dairy",420],["Frozen food",350],["Produce",270]];
+
+// ----- Dashboard KPIs -----
+document.getElementById("kpis").innerHTML = kpis.map(k =>
+  `<div class="kpi ${k[2]?'alert':''}"><b>${k[1]}</b>${k[0]}</div>`).join("");
+
+// ----- Bar chart (plain SVG, no library) -----
+(function(){
+  const w=640,h=260,pad=40,max=Math.max(...weekly.map(d=>d[1])),bw=90,gap=(w-pad*2-bw*weekly.length)/(weekly.length-1);
+  let s=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Shipments this week by cargo type">`;
+  weekly.forEach((d,i)=>{
+    const bh=(d[1]/max)*(h-pad*2), x=pad+i*(bw+gap), y=h-pad-bh;
+    s+=`<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="6" fill="#0b6f8a"/>`;
+    s+=`<text x="${x+bw/2}" y="${y-6}" text-anchor="middle">${d[1]}</text>`;
+    s+=`<text x="${x+bw/2}" y="${h-14}" text-anchor="middle">${d[0]}</text>`;
+  });
+  document.getElementById("chart").innerHTML = s+"</svg>";
+})();
+
+// ----- Business feature: Track order -----
+document.getElementById("trackForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const id = document.getElementById("orderId").value.trim().toUpperCase();
+  const box = document.getElementById("trackResult");
+  const o = orders[id];
+  box.className = "result show" + (o && !o.ok ? " warn" : "");
+  box.innerHTML = o
+    ? `<b>${id}: ${o.status}</b><br>Customer: ${o.customer}<br>Cargo: ${o.cargo}<br>Location: ${o.location}<br>Expected: ${o.eta}<br>Current temperature: ${o.temp}<br>Driver: ${o.driver}`
+    : `No order found for "${id}". Check the ID and try again, for example FL1025.`;
+});
+
+// ----- Enquiry form (demo: shows confirmation only) -----
+document.getElementById("enquiryForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const n = e.target.name.value;
+  document.getElementById("enqMsg").textContent = `Thanks ${n}, we will reply within one working day.`;
+  e.target.reset();
+});
